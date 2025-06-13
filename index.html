@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="sidebar-title">
+                <i class="fas fa-clipboard-list"></i> My To-Do App
+            </h2>
+
+            <section class="list-management">
+                <h3><i class="fas fa-list"></i> Task Lists</h3>
+                <div class="new-list-input-group">
+                    <input type="text" id="new-list-name" placeholder="New list name...">
+                    <button id="add-list-btn" title="Add New List"><i class="fas fa-plus"></i></button>
+                </div>
+                <ul id="list-selector" class="list-selector">
+                    </ul>
+            </section>
+
+            <section class="task-filters">
+                <h3><i class="fas fa-filter"></i> Filters</h3>
+                <ul>
+                    <li class="filter-btn active" data-filter="all">
+                        <i class="fas fa-tasks"></i> All Tasks
+                    </li>
+                    <li class="filter-btn" data-filter="today">
+                        <i class="fas fa-sun"></i> Today
+                    </li>
+                    <li class="filter-btn" data-filter="upcoming">
+                        <i class="fas fa-calendar-alt"></i> Upcoming
+                    </li>
+                    <li class="filter-btn" data-filter="completed">
+                        <i class="fas fa-check-circle"></i> Completed
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="current-list-title">General Tasks</h1>
+            </header>
+
+            <div class="task-input-group">
+                <input type="text" id="new-task-text" placeholder="Add a new task...">
+                <input type="text" id="task-due-date" placeholder="Due Date" class="flatpickr-input">
+                <button id="add-task-btn" title="Add Task"><i class="fas fa-plus-circle"></i> Add Task</button>
+            </div>
+
+            <div class="task-list-container">
+                <ul id="task-list">
+                    </ul>
+                <p id="empty-list-message" class="empty-list-message">
+                    <i class="fas fa-inbox"></i> No tasks here yet. Time to add some!
+                </p>
+            </div>
+
+            <div class="completion-message" id="completion-message">
+                Task completed!
+            </div>
+        </main>
+    </div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

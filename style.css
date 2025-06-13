@@ -1,0 +1,637 @@
+/* style.css */
+
+/* Variables for easy theme management */
+:root {
+    --primary-orange: #FF7F50; /* Coral */
+    --secondary-orange: #FFA07A; /* Light Salmon */
+    --accent-color: #FFD700; /* Gold - for subtle highlights */
+    --dark-text: #333;
+    --light-text: #fff;
+    --bg-light: #FFFAE6; /* Creamy background */
+    --bg-card: #fff;
+    --sidebar-bg: #FFE0B2; /* Lighter peach for sidebar */
+    --border-color: #eee;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --completed-text: #888;
+    --completed-bg: #f5f5f5;
+    --due-soon-bg: #FFF3E0; /* Lighter orange for reminders */
+    --due-soon-border: #FFCC80; /* Orange border for reminders */
+    --success-color: #4CAF50; /* Green for completion */
+    --danger-color: #F44336; /* Red for deletion */
+}
+
+/* Base Styles & Typography */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--dark-text);
+    line-height: 1.6;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1400px; /* Increased max-width for larger feel */
+    background-color: var(--bg-card);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    overflow: hidden;
+    min-height: 700px; /* Ensure a good minimum height */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 300px; /* Increased sidebar width */
+    background-color: var(--sidebar-bg);
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-title {
+    color: var(--primary-orange);
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sidebar h3 {
+    font-size: 1.1em;
+    color: var(--dark-text);
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar li:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: var(--primary-orange);
+    transform: translateX(5px);
+}
+
+.sidebar li.active {
+    background-color: var(--primary-orange);
+    color: var(--light-text);
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+}
+
+.sidebar li i {
+    font-size: 1.1em;
+    width: 20px; /* Fixed width for icons */
+    text-align: center;
+}
+
+/* List Management */
+.list-management {
+    margin-top: 0;
+}
+
+.new-list-input-group {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.new-list-input-group input {
+    flex-grow: 1;
+    border: none;
+    padding: 12px 15px;
+    font-size: 0.95em;
+    outline: none;
+    background-color: var(--bg-card);
+}
+
+.new-list-input-group button {
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.2s ease;
+}
+
+.new-list-input-group button:hover {
+    background-color: #FFC107; /* Darker gold */
+}
+
+.list-selector li {
+    position: relative;
+    justify-content: space-between;
+}
+
+.list-selector li .delete-list-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 0.9em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+    opacity: 0; /* Hidden by default */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.list-selector li:hover .delete-list-btn {
+    opacity: 1; /* Show on hover */
+    color: var(--danger-color);
+}
+
+.list-selector li.active .delete-list-btn {
+     color: var(--light-text);
+}
+
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.main-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#current-list-title {
+    color: var(--primary-orange);
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+/* Task Input Group */
+.task-input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.task-input-group input[type="text"] {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-input-group input[type="text"]:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.2);
+}
+
+#new-task-text {
+    flex-grow: 1;
+}
+
+#task-due-date {
+    width: 150px; /* Fixed width for date input */
+    flex-shrink: 0;
+}
+
+.task-input-group button {
+    padding: 12px 20px;
+    background-color: var(--primary-orange);
+    color: var(--light-text);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task-input-group button:hover {
+    background-color: #E5694F; /* Darker orange */
+    transform: translateY(-2px);
+}
+
+.task-input-group button:active {
+    transform: translateY(0);
+}
+
+/* Task List Display */
+.task-list-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 15px; /* Space for scrollbar */
+}
+
+/* Custom Scrollbar */
+.task-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+.task-list-container::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+.task-list-container::-webkit-scrollbar-thumb {
+    background: var(--secondary-orange);
+    border-radius: 10px;
+}
+.task-list-container::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-orange);
+}
+
+
+#task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#task-list li {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    transition: all 0.3s ease;
+    min-height: 80px; /* Generous min-height */
+}
+
+/* Task States */
+#task-list li.completed {
+    text-decoration: line-through;
+    color: var(--completed-text);
+    background-color: var(--completed-bg);
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: none;
+}
+
+#task-list li.due-today,
+#task-list li.due-tomorrow {
+    background-color: var(--due-soon-bg);
+    border-left: 5px solid var(--due-soon-border); /* Highlight on left */
+    box-shadow: 0 4px 15px rgba(255, 127, 80, 0.1);
+}
+
+.task-details {
+    flex-grow: 1;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.task-details .task-text {
+    font-size: 1.15em;
+    font-weight: 500;
+}
+
+.task-details .due-date {
+    font-size: 0.9em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.task-details .due-date i {
+    color: var(--primary-orange);
+    font-size: 0.95em;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.task-actions button {
+    width: 40px; /* Fixed width for icon buttons */
+    height: 40px; /* Fixed height for icon buttons */
+    border-radius: 50%; /* Make them circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    color: var(--light-text);
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.task-actions .complete-btn {
+    background-color: var(--success-color);
+}
+
+.task-actions .complete-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.task-actions .delete-btn {
+    background-color: var(--danger-color);
+}
+
+.task-actions .delete-btn:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+/* Empty List Message */
+.empty-list-message {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    margin-top: 50px;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.empty-list-message i {
+    font-size: 2em;
+    color: #ccc;
+}
+
+
+/* Completion Message */
+.completion-message {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: var(--success-color);
+    color: var(--light-text);
+    padding: 12px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    z-index: 1000;
+    font-size: 1em;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.completion-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Confetti Canvas */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999; /* Ensure it's on top */
+}
+
+/* Flatpickr overrides for orange theme */
+.flatpickr-calendar {
+    border-radius: 8px !important;
+    box-shadow: 0 6px 20px var(--shadow-medium) !important;
+    border: none !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange,
+.flatpickr-day.endRange:hover {
+    background: var(--primary-orange) !important;
+    border-color: var(--primary-orange) !important;
+    color: var(--light-text) !important;
+}
+
+.flatpickr-day.today {
+    border-color: var(--primary-orange) !important;
+    color: var(--primary-orange) !important;
+}
+
+.flatpickr-day.today:hover {
+    background: var(--primary-orange) !important;
+    color: var(--light-text) !important;
+}
+
+.flatpickr-day.inRange {
+    background: var(--secondary-orange) !important;
+    border-color: var(--secondary-orange) !important;
+    color: var(--light-text) !important;
+}
+
+.flatpickr-day.disabled {
+    color: #ccc !important;
+}
+
+.flatpickr-months .flatpickr-month {
+    color: var(--dark-text) !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    font-weight: 600;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover {
+    background: var(--primary-orange) !important;
+    color: var(--light-text) !important;
+}
+
+.flatpickr-weekday {
+    color: var(--primary-orange) !important;
+    font-weight: 600 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .container {
+        width: 95%;
+        max-width: 900px;
+        min-height: unset; /* Let height adjust on smaller screens */
+        flex-direction: column; /* Stack sidebar on top on smaller screens */
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    body {
+        min-height: 100vh; /* Ensure full viewport height */
+        align-items: flex-start; /* Start from top */
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        border-right: none;
+        flex-direction: row; /* Make sidebar horizontal */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .sidebar h2, .sidebar h3 {
+        width: 100%; /* Take full width */
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 1.5em;
+        padding-bottom: 5px;
+    }
+
+    .sidebar .list-management, .sidebar .task-filters {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar ul {
+        display: flex; /* Make filter/list buttons horizontal */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .sidebar li {
+        padding: 8px 12px;
+        font-size: 0.95em;
+        margin-bottom: 0;
+        gap: 5px;
+    }
+    .sidebar li i {
+        font-size: 1em;
+        width: auto;
+    }
+
+    .new-list-input-group {
+        width: 80%; /* Adjust width for mobile input */
+        max-width: 300px;
+    }
+
+    .list-selector li .delete-list-btn {
+        right: 5px;
+        opacity: 1; /* Always show delete on small screens if desired */
+        font-size: 0.8em;
+    }
+    .list-selector li {
+        width: 45%; /* Arrange lists in two columns */
+        justify-content: center;
+        text-align: center;
+    }
+    .list-selector li span {
+        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .main-content {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    #current-list-title {
+        font-size: 2em;
+    }
+
+    .task-input-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .task-input-group input[type="text"],
+    .task-input-group button {
+        width: 100%;
+        max-width: 400px; /* Limit input width */
+        margin: 0 auto;
+        font-size: 0.95em;
+        padding: 10px 15px;
+    }
+    #task-due-date {
+        width: 100%;
+    }
+
+    #task-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        min-height: unset; /* Remove min-height */
+    }
+
+    .task-details {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .task-actions button {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+
+    .completion-message {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        width: 90%;
+        text-align: center;
+    }
+    .completion-message.show {
+        transform: translateX(-50%) translateY(0);
+    }
+}
